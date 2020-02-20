@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.LoginMapper">
+
+    <insert id="insertLogin" parameterType="com.app.entity.Login">
+		insert into login(id,userId,token,status,userName,nickName,time,device,extend1,extend2)
+		values(#{login.id},
+		#{login.userId},
+		#{login.token},
+		#{login.status},
+		#{login.userName},
+		#{login.nickName},
+	  #{login.time},
+	  #{login.device},
+	  #{login.extend1},
+	  #{login.extend2})
+</insert>
+
+	<select id="selectId" resultType="String">
+        select userId from login where token = #{token}
+    </select>
+
+</mapper>
