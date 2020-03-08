@@ -6,17 +6,17 @@ import java.io.Serializable;
 
 public class ResultBean<T> implements Serializable {
 
-    private String status;
+    private int status;
 
     private String msg;
 
     private T data;
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -47,7 +47,7 @@ public class ResultBean<T> implements Serializable {
         this.msg = resultEnum.getMsg();
     }
 
-    public ResultBean(String status, String msg) {
+    public ResultBean(int status, String msg) {
         this.status = status;
         this.msg = msg;
     }
@@ -66,7 +66,7 @@ public class ResultBean<T> implements Serializable {
         return setResultEnum(resultEnum);
     }
 
-    public ResultBean setResultEnum(String status, String msg){
+    public ResultBean setResultEnum(int status, String msg){
         this.status = status;
         this.msg = msg;
         return this;

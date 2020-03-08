@@ -2,8 +2,8 @@ package com.app.entity;
 
 public enum ResultEnum {
 
-    success("200","操作成功！"),
-    error("500","服务器异常！"),
+    success(200,"操作成功！"),
+    error(500,"服务器异常！"),
 //    server_error("-500","服务异常"),
 //    unlogin("-4","未登录"),
 //    denine("403","没有权限"),
@@ -18,10 +18,10 @@ public enum ResultEnum {
 //    HTTP_ERROR("-405","请求异常"),
 //    API_ERROR("1001","")
             ;
-    private String status;
+    private int status;
     private String msg;
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -29,7 +29,7 @@ public enum ResultEnum {
         return msg;
     }
 
-    ResultEnum(String status, String msg) {
+    ResultEnum(int status, String msg) {
         this.status = status;
         this.msg = msg;
     }

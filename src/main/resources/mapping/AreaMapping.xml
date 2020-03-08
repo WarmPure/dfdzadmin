@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.AreaMapper">
+
+    <resultMap id="BaseResultMap" type="com.app.entity.Area">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="area_name" jdbcType="VARCHAR" property="area_name"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="join_time" jdbcType="VARCHAR" property="join_time"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="footprint" jdbcType="VARCHAR" property="footprint"/>
+        <result column="unit_num" jdbcType="INTEGER" property="unit_num"/>
+        <result column="home_num" jdbcType="INTEGER" property="home_num"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="comments" jdbcType="VARCHAR" property="comments"/>
+        <result column="extend1" jdbcType="VARCHAR" property="extend1"/>
+    </resultMap>
+
+    <insert id="insertArea" parameterType="com.app.entity.Area">
+        insert into area(id,area_name,address,join_time,type,footprint,unit_num,home_num,status,comments,extend1)
+        values(#{area.id},
+        #{area.area_name},
+        #{area.address},
+        #{area.join_time},
+        #{area.type},
+        #{area.footprint},
+        #{area.unit_num},
+        #{area.home_num},
+        #{area.status},
+        #{area.comments},
+        #{area.extend1})
+    </insert>
+
+    <update id="updateArea" parameterType="com.app.entity.Area">
+        UPDATE area
+        <set>
+            <if test="area.id!=null">id=#{area.id},</if>
+            <if test="area.area_name!=null">area_name=#{area.area_name},</if>
+            <if test="area.address!=null">address=#{area.address},</if>
+            <if test="area.join_time!=null">join_time=#{area.join_time},</if>
+            <if test="area.type!=null">type=#{area.type},</if>
+            <if test="area.footprint!=null">footprint=#{area.footprint},</if>
+            <if test="area.unit_num!=null">unit_num=#{area.unit_num},</if>
+            <if test="area.home_num!=null">home_num=#{area.home_num},</if>
+            <if test="area.status!=null">status=#{area.status},</if>
+            <if test="area.comments!=null">comments=#{area.comments},</if>
+            <if test="area.extend1!=null">extend1=#{area.extend1}</if>
+        </set>
+        WHERE id=#{area.id}
+    </update>
+
+    <select id="getArea" resultType="com.app.entity.Area">
+        select * from area where id = #{id}
+    </select>
+
+    <select id="getAreaList" resultType="com.app.entity.Area">
+        select * from area where 1 = 1
+    </select>
+
+    <select id="getAreaByName" resultType="com.app.entity.Area">
+        select * from area where area_name = #{name}
+    </select>
+
+    <update id="deleteArea" parameterType="com.app.entity.Area">
+        UPDATE area
+        <set>
+            <if test="area.id!=null">id=#{area.id},</if>
+            <if test="area.status!=null">status=#{0},</if>
+        </set>
+        WHERE id=#{area.id}
+    </update>
+
+    <!--<delete id="deleteAreaTest">-->
+        <!--delete from t_employee where id = #{id}-->
+    <!--</delete>-->
+
+</mapper>

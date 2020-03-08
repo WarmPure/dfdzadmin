@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoginMapper {
 
-
     boolean insertLogin(@Param("login") Login login);
 
     String selectId(String token);
