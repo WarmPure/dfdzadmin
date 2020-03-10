@@ -46,8 +46,8 @@ public class AreaController {
             resultBean.setMsg("success");
             resultBean.setData(areaList);
         } else {
-            resultBean.setStatus(500);
-            resultBean.setMsg("查询小区信息出错");
+            resultBean.setStatus(200);
+            resultBean.setMsg("暂无小区信息");
         }
 
         return resultBean;

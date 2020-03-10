@@ -58,7 +58,7 @@ public class UserController {
                 resultBean.setData(login);
             } else {
                 resultBean.setStatus(500);
-                resultBean.setMsg("用户登陆失败");
+                resultBean.setMsg("登录异常");
             }
         } else {
             resultBean.setStatus(500);

@@ -21,6 +21,10 @@ public class AreaService {
         return areaMapper.getAreaByName(name);
     }
 
+    public Area getAreaById(int id){
+        return areaMapper.getAreaById(id);
+    }
+
     public List<Area> getAreaList(){
         return areaMapper.getAreaList();
     }
