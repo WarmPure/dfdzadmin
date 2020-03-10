@@ -50,22 +50,25 @@
     </update>
 
     <select id="getArea" resultType="com.app.entity.Area">
-        select * from area where id = #{id}
+        select * from area where id = #{id} AND status = 1
     </select>
 
     <select id="getAreaList" resultType="com.app.entity.Area">
-        select * from area where 1 = 1
+        select * from area where status = 1
     </select>
 
     <select id="getAreaByName" resultType="com.app.entity.Area">
-        select * from area where area_name = #{name}
+        select * from area where area_name = #{name} AND status = 1
+    </select>
+
+    <select id="getAreaById" resultType="com.app.entity.Area">
+        select * from area where id = #{id} AND status = 1
     </select>
 
     <update id="deleteArea" parameterType="com.app.entity.Area">
         UPDATE area
         <set>
-            <if test="area.id!=null">id=#{area.id},</if>
-            <if test="area.status!=null">status=#{0},</if>
+            <if test="area.status!=null">status=0,</if>
         </set>
         WHERE id=#{area.id}
     </update>
