@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.HouseMapper">
+
+    <resultMap id="BaseResultMap" type="com.app.entity.House">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="area_id" jdbcType="INTEGER" property="area_id"/>
+        <result column="unit" jdbcType="VARCHAR" property="unit"/>
+        <result column="gate_num" jdbcType="VARCHAR" property="gate_num"/>
+        <result column="footprint" jdbcType="VARCHAR" property="footprint"/>
+        <result column="master" jdbcType="VARCHAR" property="master"/>
+        <result column="isarrear" jdbcType="INTEGER" property="isarrear"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="comments" jdbcType="VARCHAR" property="comments"/>
+        <result column="house_id" jdbcType="VARCHAR" property="house_id"/>
+    </resultMap>
+
+    <insert id="insertHouse" parameterType="com.app.entity.House">
+        insert into house(id,area_id,unit,gate_num,footprint,master,isarrear,status,comments,house_id)
+        values(#{house.id},
+        #{house.area_id},
+        #{house.unit},
+        #{house.gate_num},
+        #{house.footprint},
+        #{house.master},
+        #{house.isarrear},
+        #{house.status},
+        #{house.comments},
+        #{house.house_id})
+    </insert>
+
+    <update id="updateHouse" parameterType="com.app.entity.House">
+        UPDATE house
+        <set>
+            <if test="house.id!=null">id=#{house.id},</if>
+            <if test="house.area_id!=null">area_id=#{house.area_id},</if>
+            <if test="house.unit!=null">unit=#{house.unit},</if>
+            <if test="house.gate_num!=null">gate_num=#{house.gate_num},</if>
+            <if test="house.footprint!=null">footprint=#{house.footprint},</if>
+            <if test="house.master!=null">master=#{house.master},</if>
+            <if test="house.isarrear!=null">isarrear=#{house.isarrear},</if>
+            <if test="house.home_num!=null">home_num=#{house.home_num},</if>
+            <if test="house.status!=null">status=#{house.status},</if>
+            <if test="house.comments!=null">comments=#{house.comments},</if>
+            <if test="house.house_id!=null">house_id=#{house.house_id},</if>
+        </set>
+        WHERE id=#{house.id}
+    </update>
+
+    <select id="getHouseList" resultType="com.app.entity.House">
+        select * from house
+        <where>
+            <if test="area_id!=null and area_id!=''">
+                house.area_id = #{area_id}
+            </if>
+            <if test="isarrear!=null and isarrear!=''">
+                and house.isarrear = #{isarrear}
+            </if>
+            AND status = 1
+        </where>
+    </select>
+
+    <select id="getHouseById" resultType="com.app.entity.House">
+        select * from house where house_id = #{house_id} AND status = 1
+    </select>
+
+    <update id="deleteHouse" parameterType="com.app.entity.House">
+        UPDATE house
+        <set>
+            <if test="house.status!=null">status=0,</if>
+        </set>
+        WHERE id=#{house.id}
+    </update>
+
+</mapper>
