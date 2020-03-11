@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.PayBillMapper">
+
+    <resultMap id="BaseResultMap" type="com.app.entity.PayBill">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="house_id" jdbcType="VARCHAR" property="house_id"/>
+        <result column="pay_num" jdbcType="DECIMAL" property="pay_num"/>
+        <result column="pay_time" jdbcType="VARCHAR" property="pay_time"/>
+        <result column="pay_desc" jdbcType="VARCHAR" property="pay_desc"/>
+        <result column="master" jdbcType="VARCHAR" property="master"/>
+        <result column="pay_type" jdbcType="INTEGER" property="pay_type"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="comments" jdbcType="VARCHAR" property="comments"/>
+    </resultMap>
+
+    <insert id="insertPayBill" parameterType="com.app.entity.PayBill">
+        insert into pay_bill(id,house_id,pay_num,pay_time,pay_desc,master,pay_type,status,comments)
+        values(#{paybill.id},
+        #{paybill.house_id},
+        #{paybill.pay_num},
+        #{paybill.pay_time},
+        #{paybill.pay_desc},
+        #{paybill.master},
+        #{paybill.pay_type},
+        #{paybill.status},
+        #{paybill.comments})
+    </insert>
+
+    <update id="updatePayBill" parameterType="com.app.entity.PayBill">
+        UPDATE pay_bill
+        <set>
+            <if test="paybill.id!=null">id=#{paybill.id},</if>
+            <if test="paybill.house_id!=null">house_id=#{paybill.house_id},</if>
+            <if test="paybill.pay_num!=null">pay_num=#{paybill.pay_num},</if>
+            <if test="paybill.pay_time!=null">pay_time=#{paybill.pay_time},</if>
+            <if test="paybill.pay_desc!=null">pay_desc=#{paybill.pay_desc},</if>
+            <if test="paybill.master!=null">master=#{paybill.master},</if>
+            <if test="paybill.pay_type!=null">pay_type=#{paybill.pay_type},</if>
+            <if test="paybill.status!=null">status=#{paybill.status},</if>
+            <if test="paybill.comments!=null">comments=#{paybill.comments},</if>
+        </set>
+        WHERE id=#{paybill.id}
+    </update>
+
+    <select id="getPayBillList" resultType="com.app.entity.PayBill">
+        select * from pay_bill
+        <where>
+            <if test="house_id!=null and house_id!=''">
+                pay_bill.house_id = #{house_id}
+            </if>
+            AND status = 1
+        </where>
+    </select>
+
+    <select id="getPayBillByHouseId" resultType="com.app.entity.PayBill">
+        select * from pay_bill where house_id = #{house_id} AND status = 1
+    </select>
+
+    <update id="deletePayBill" parameterType="com.app.entity.PayBill">
+        UPDATE pay_bill
+        <set>
+            <if test="paybill.status!=null">status=0,</if>
+        </set>
+        WHERE id=#{paybill.id}
+    </update>
+
+</mapper>

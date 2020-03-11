@@ -49,10 +49,6 @@
         WHERE id=#{area.id}
     </update>
 
-    <select id="getArea" resultType="com.app.entity.Area">
-        select * from area where id = #{id} AND status = 1
-    </select>
-
     <select id="getAreaList" resultType="com.app.entity.Area">
         select * from area where status = 1
     </select>

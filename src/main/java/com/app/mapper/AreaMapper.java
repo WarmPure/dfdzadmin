@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface AreaMapper {
 
-    Area getArea(@Param("id") int id);
-
     List<Area> getAreaByName(@Param("name") String name);
 
     Area getAreaById(@Param("id") int id);
