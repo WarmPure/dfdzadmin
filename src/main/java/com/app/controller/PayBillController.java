@@ -1,7 +1,9 @@
 package com.app.controller;
 
+import com.app.entity.House;
 import com.app.entity.PayBill;
 import com.app.entity.ResultBean;
+import com.app.service.HouseService;
 import com.app.service.PayBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +26,9 @@ public class PayBillController {
     @Autowired
     private PayBillService payBillService;
 
+    @Autowired
+    private HouseService houseService;
+
     @RequestMapping(value = "getPayBillList")
     public ResultBean<List<PayBill>> getPayBillList(@RequestBody Map<String, Object> reqMap) {
         String house_id = reqMap.get("house_id").toString();
@@ -43,14 +48,20 @@ public class PayBillController {
     @RequestMapping(value = "addPayBill")
     public ResultBean<String> addPayBill(@RequestBody PayBill payBill) {
         ResultBean<String> resultBean = new ResultBean<>();
-        boolean insertPayBill = payBillService.insertPayBill(payBill);
-        if (insertPayBill) {
-            resultBean.setStatus(200);
-            resultBean.setMsg("success");
-            resultBean.setData("添加账单成功");
-        } else {
-            resultBean.setStatus(200);
-            resultBean.setMsg("添加失败");
+        String house_id = payBill.getHouse_id();
+        List<House> houseList = houseService.getHouseById(house_id);
+        if (null != houseList && houseList.size() > 0) {
+            boolean insertPayBill = payBillService.insertPayBill(payBill);
+            if (insertPayBill) {
+                resultBean.setStatus(200);
+                resultBean.setMsg("添加账单成功");
+            } else {
+                resultBean.setStatus(500);
+                resultBean.setMsg("添加失败");
+            }
+        }else {
+            resultBean.setStatus(500);
+            resultBean.setMsg("房屋编号不存在");
         }
         return resultBean;
     }
@@ -61,10 +72,9 @@ public class PayBillController {
         boolean resultupdate = payBillService.updatePayBill(payBill);
         if (resultupdate) {
             resultBean.setStatus(200);
-            resultBean.setMsg("success");
-            resultBean.setData("账单更新成功");
+            resultBean.setMsg("账单更新成功");
         } else {
-            resultBean.setStatus(200);
+            resultBean.setStatus(500);
             resultBean.setMsg("账单更新失败");
         }
         return resultBean;
@@ -76,10 +86,9 @@ public class PayBillController {
         boolean resultDelete = payBillService.deletePayBill(payBill);
         if (resultDelete) {
             resultBean.setStatus(200);
-            resultBean.setMsg("success");
-            resultBean.setData("账单删除成功");
+            resultBean.setMsg("账单删除成功");
         } else {
-            resultBean.setStatus(200);
+            resultBean.setStatus(500);
             resultBean.setMsg("账单删除失败");
         }
         return resultBean;

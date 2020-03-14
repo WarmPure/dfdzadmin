@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     username: root
-    password: 123456
+    password: toor@123
     url: jdbc:mysql://localhost:3306/dfdz_realty?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
 

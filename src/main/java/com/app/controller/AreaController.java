@@ -55,23 +55,17 @@ public class AreaController {
 
     @RequestMapping(value = "addArea")
     public ResultBean<String> addArea(@RequestBody Area area) {
-
         String area_name = area.getArea_name();
-
         ResultBean<String> resultBean = new ResultBean<>();
-
         List<Area> areaList = areaService.getAreaByName(area_name);
-
         if (null != areaList && areaList.size() > 0) {
-            resultBean.setStatus(200);
-            resultBean.setMsg("success");
-            resultBean.setData("该小区已存在，请确认后添加");
+            resultBean.setStatus(500);
+            resultBean.setMsg("该小区已存在，请确认后添加");
         } else {
             boolean insertArea = areaService.insertArea(area);
             if (insertArea) {
                 resultBean.setStatus(200);
-                resultBean.setMsg("success");
-                resultBean.setData("添加小区成功");
+                resultBean.setMsg("添加小区成功");
             } else {
                 resultBean.setStatus(500);
                 resultBean.setMsg("添加小区失败");
@@ -94,8 +88,7 @@ public class AreaController {
             boolean resultupdate = areaService.updateArea(area);
             if (resultupdate) {
                 resultBean.setStatus(200);
-                resultBean.setMsg("success");
-                resultBean.setData("小区信息更新成功");
+                resultBean.setMsg("小区信息更新成功");
             } else {
                 resultBean.setStatus(500);
                 resultBean.setMsg("小区信息更新失败");
@@ -121,8 +114,7 @@ public class AreaController {
             boolean resultDelete = areaService.deleteArea(area);
             if (resultDelete) {
                 resultBean.setStatus(200);
-                resultBean.setMsg("success");
-                resultBean.setData("删除成功");
+                resultBean.setMsg("删除成功");
             } else {
                 resultBean.setStatus(500);
                 resultBean.setMsg("删除失败");

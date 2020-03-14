@@ -66,15 +66,13 @@ public class HouseController {
         List<House> houseList = houseService.getHouseById(house_id);
 
         if (null != houseList && houseList.size() > 0) {
-            resultBean.setStatus(200);
-            resultBean.setMsg("success");
-            resultBean.setData("该房屋编号已存在");
+            resultBean.setStatus(500);
+            resultBean.setMsg("该房屋编号已存在");
         } else {
             boolean insertHouse = houseService.insertHouse(house);
             if (insertHouse) {
                 resultBean.setStatus(200);
-                resultBean.setMsg("success");
-                resultBean.setData("添加房屋信息成功");
+                resultBean.setMsg("添加房屋信息成功");
             } else {
                 resultBean.setStatus(500);
                 resultBean.setMsg("添加失败");
@@ -96,8 +94,7 @@ public class HouseController {
             boolean resultupdate = houseService.updateHouse(house);
             if (resultupdate) {
                 resultBean.setStatus(200);
-                resultBean.setMsg("success");
-                resultBean.setData("房屋信息更新成功");
+                resultBean.setMsg("房屋信息更新成功");
             } else {
                 resultBean.setStatus(500);
                 resultBean.setMsg("房屋信息更新失败");
@@ -123,8 +120,7 @@ public class HouseController {
             boolean resultDelete = houseService.deleteHouse(house);
             if (resultDelete) {
                 resultBean.setStatus(200);
-                resultBean.setMsg("success");
-                resultBean.setData("房屋删除成功");
+                resultBean.setMsg("房屋删除成功");
             } else {
                 resultBean.setStatus(500);
                 resultBean.setMsg("删除失败");
